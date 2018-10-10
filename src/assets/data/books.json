@@ -1,0 +1,28 @@
+[
+    {
+      "id": 1,
+      "name": "Pro AngularJS",
+      "author": "Freeman"
+    },
+    {
+      "id": 2,
+      "name": "AngularJS: Up and Running: Enhanced Productivity with Structured Web Apps",
+      "author": "Brad Green"
+    },
+    {
+      "id": 3,
+      "name": "Angular 2 Cookbook",
+      "author": "Matt Frisbie"
+    },
+    {
+      "id": 4,
+      "name": "Learning Angular: A Hands-On Guide to Angular 2 and Angular 4",
+      "author": "Brad Dayley"
+    },
+    {
+      "id": 5,
+      "name": "ng-book: The Complete Book on Angular 6",
+      "author": "Nate Murray"
+    }
+  ]
+  

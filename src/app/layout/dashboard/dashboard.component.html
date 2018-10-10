@@ -1,0 +1,123 @@
+<app-page-header [heading]="'Angular Library'" ></app-page-header>
+<div class="main-container">
+<h3>Available Books in Library</h3>
+<br>
+<div class="container">
+<div class="row" >
+    <div class="col-sm-4">
+        <input type="text" class="col-md-6 form-control form-control-sm" placeholder="Search...." [(ngModel)]="query" id="listSearch">
+    </div>
+    <div class="col-sm-2">
+        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">
+           Add Book
+          </button>
+    </div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-2">
+        <button class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#deleteModal">Delete All books</button>
+    </div>
+</div>
+<br>  
+ 
+<div class="row">
+    <div  class="col-md-4 border-success card text-center w-90" *ngFor="let Book of Books | NameFilter:query;let i = index ">                
+        <div class="card-body">
+         <div class="row"><div class="col-md-9 col-xs-7"> <p class="card-title text-info text-center" >{{Book.name}}</p>
+    </div>
+    <div class="col-md-3 col-xs-5 text-right">
+        <a  (click)="edit(Book)" data-toggle="modal" data-target="#editModal" ><i class=" icon fa fa-info-circle"></i></a>
+        <a  (click)="deleteBook(i)"><i class="fa fa-trash delete-icon"></i></a>
+    </div>
+    </div>
+</div>
+</div>
+</div>
+   
+<!-- For creating books -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+<div class="modal-body">     
+<form [formGroup]='book' (ngSubmit)="CreateBook(book)">
+    <div class="form-group">
+        <label for="name">
+          Book Name : 
+        </label>
+        <input type="text" class="form-control" formControlName='fname' name='fname' id='fname' placeholder="Your First name">  
+        
+          <div *ngIf="book.controls['fname'].touched && !book.controls['fname'].valid">  
+              <span *ngIf="book.controls['fname'].hasError('required') " style="color:red">  
+                 Please Enter Book name
+                  </span>       
+          </div>  
+    </div>
+    <div class="form-group">
+        <label for="text">Author :</label><br>
+            <input type="text" class="form-control" formControlName='fauthor' name='fauthor' id='fauthor' placeholder="Your First name">             
+              <div *ngIf="book.controls['fauthor'].touched && !book.controls['fauthor'].valid">  
+                  <span *ngIf="book.controls['fauthor'].hasError('required') " style="color:red">  
+                     Please Enter Author name
+                      </span>  
+              </div> 
+          </div>
+    <input type="Submit" class="btn btn-success float-right" value="Create Book" [disabled]='!book.valid' >  
+</form>
+        </div>     
+      </div>
+    </div>
+</div>
+  
+<!-- For deleting all books -->
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure ? this Action can't be reverted back.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="DeleteAllBooks()">Delete</button>
+        </div>
+      </div>
+    </div>  
+  </div>
+ 
+<!-- For editing book -->
+
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <form #editForm="ngForm" (ngSubmit)="EditBook()">
+                            <div class="form-group">
+                                    <label for="text">Name</label><br>
+                                    <input type="text" class="form-control"  [(ngModel)]="editBook.name"  name="name" required #name="ngModel">      
+                                  </div>
+                            <div class="form-group">
+                                    <label for="text">Author</label><br>
+                                    <input type="text" class="form-control"  [(ngModel)]="editBook.author"  name="Author" required #author="ngModel">      
+                            </div>                       
+                        <button class="btn btn-success float-right" >Edit Details</button>
+                        </form>                    
+            </div>         
+          </div>
+        </div>
+      </div>
+    

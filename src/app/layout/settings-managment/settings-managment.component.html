@@ -1,0 +1,24 @@
+<app-page-header [heading]="'Settings'" ></app-page-header>
+<div class="container">
+<div class="row">
+  <div class="col-xs-3 col-sm-3 col-md-1"></div>
+  <div class="col-xs-6 col-sm-6 col-md-10">
+    <div class="card-title">
+      Change password
+    </div>
+    <form name="form" (ngSubmit)="changepassword()" #f="ngForm" novalidate>
+      <div class="form-group" >                              
+          <input type="password" class="form-control" name="oldPassword" [(ngModel)]="changePassword.oldPassword" #oldPassword="ngModel" placeholder="Old password......" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
+      </div>
+      <div class="form-group" >                              
+        <input type="password" class="form-control" name="newPassword" [(ngModel)]="changePassword.newPassword" #newPassword="ngModel" placeholder="new password......" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
+    </div>
+      <button class="btn btn-success" type="submit">Submit</button>
+      <div class="alert alert-danger" *ngIf="hide">
+          password Has been succesfully sent to your registered email.
+        </div>
+</form>
+  </div>
+</div>
+  <div class="col-xs-3 col-sm-3 col-md-1"></div>
+</div>

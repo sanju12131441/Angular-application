@@ -1,0 +1,13 @@
+.breadcrumb > li + li:before {
+    color: orange;
+    content: " > ";
+    padding: 0 5px;
+}
+.breadcrumb >.active {
+    color: orange;
+ }
+ .breadcrumb{
+     border-bottom: 1px solid lightgrey; 
+     background-color:white;
+     box-shadow: 0 5px 5px -5px lightgrey;
+ }

@@ -1,0 +1,75 @@
+<!--  Login page -->
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+          <div class="card " style="margin-top:35%;">
+                  <div class="login">
+                         <h1>HI THERE. PLEASE LOG IN.</h1>
+                         <form name="form"  novalidate>
+                                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                                         
+                                         <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" placeholder="Username......" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
+                                         
+                                         <div *ngIf="username.errors &&(username.touched || username.dirty)" style="color: rgb(206, 64, 64)">
+                                              <div [hidden]="!username.errors?.pattern">
+                                                Invalid Email Address....
+                                              </div> 
+                                             </div> 
+                                     </div>
+                                     <div  [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                                             <input type="password"  name="password" [(ngModel)]="model.password" #password="ngModel" placeholder="Password......" pattern="(?=^.{8,}$)((?=.*\d)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" min-length="8" required />
+                                             <!-- <div *ngIf="password.errors &&(password.touched || password.dirty)" style="color: rgb(206, 64, 64)">
+                                                  <div [hidden]="!password.errors?.pattern">
+                                                    Should contain 1 special character and 1 Uppercase letter and 1 Lowercase letter...
+                                                  </div>                                           
+                                         </div>-->
+                                         </div>
+                           <p class="remember_me">
+                             <label>
+                               <input type="checkbox" name="remember_me" id="remember_me">
+                               Remember me 
+                             </label>
+                           </p><br>
+                           <p class="submit"><input type="submit" name="commit" value="LOG IN" [routerLink]="['/dashboard']" (click)="onLoggedin()"></p>
+                         
+                          <!-- <a href="#" class="forgot" >Don't have an account ?</a>
+                          <br> -->
+                          <a data-target="#Forgotpassword" data-toggle="modal" class="forgot" >Forgot your Password ?</a>
+                        </form>
+                       </div>
+                     </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<!-- forgot password modal -->
+<div  class="modal fade" id="Forgotpassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Forgot password</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+     
+      <form name="form" (ngSubmit)="Forgotpassword()" #f="ngForm" novalidate>
+          <div class="form-group">
+                                         
+              <input type="text" class="form-control" name="password" placeholder="email"/>
+   
+          </div>
+          <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+    <br>
+    <div class="alert alert-danger" *ngIf="hide">
+      password Has been succesfully sent to your registered email.
+    </div>
+    <div *ngIf="error">
+     Email you have entered is not registered with us.
+    </div>
+    </div>
+  </div>
+</div>
+</div>
